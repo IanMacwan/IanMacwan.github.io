@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useTerminalStore } from "../../store/terminalStore";
 import {
   ABOUT_OUTPUT,
-  PROJECTS_OUTPUT,
   EXPERIENCE_OUTPUT,
   CONTACT_OUTPUT,
 } from "../../content/terminalData";
@@ -48,9 +47,6 @@ export default function Terminal() {
       case "about":
         addOutput(ABOUT_OUTPUT, "text");
         break;
-      case "projects":
-        addOutput(PROJECTS_OUTPUT, "text");
-        break;
       case "experience":
         addOutput(EXPERIENCE_OUTPUT, "text");
         break;
@@ -63,6 +59,12 @@ export default function Terminal() {
       case "clear":
         clear();
         addOutput("", "neofetch");
+        break;
+      case "projects":
+      case "vim projects.md":
+      case "nvim projects.md":
+        addOutput("→ navigating to /projects ...", "text");
+        setTimeout(() => navigate("/projects"), 350);
         break;
       case "blog":
       case "vim blog.md":

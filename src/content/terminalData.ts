@@ -69,12 +69,6 @@ export const ABOUT_OUTPUT = `
 coming soon!
 `.trim();
 
-export const PROJECTS_OUTPUT = `
-## projects.md
-
-coming soon!
-`.trim();
-
 export const EXPERIENCE_OUTPUT = `
 ## experience.md
 
