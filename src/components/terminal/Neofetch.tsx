@@ -74,25 +74,19 @@ export default function Neofetch() {
               ) : label === "projects" ? (
                 <>
                   <a
-                    href="proj1"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/projects/test-proj"
                     className="nf-link nf-proj"
                   >
                     {value1}
                   </a>,&nbsp;
                   <a
-                    href="proj2"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/projects/test-proj"
                     className="nf-link nf-proj"
                   >
                     {value2}
                   </a>,&nbsp;
                   <a
-                    href="proj3"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/projects/test-proj"
                     className="nf-link nf-proj"
                   >
                     {value3}
@@ -101,25 +95,19 @@ export default function Neofetch() {
               ) : label === "blog" ? (
                 <>
                   <a
-                    href="blog1"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/blogs/test-blog"
                     className="nf-link nf-blog"
                   >
                     {value1}
                   </a>,&nbsp;
                   <a
-                    href="blog2"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/blogs/test-blog"
                     className="nf-link nf-blog"
                   >
                     {value2}
                   </a>,&nbsp;
                   <a
-                    href="blog3"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/blogs/test-blog"
                     className="nf-link nf-blog"
                   >
                     {value3}
