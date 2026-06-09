@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { blogPosts } from "../content/blogPosts";
+import { SiMarkdown } from "react-icons/si";
 
 export default function BlogIndex() {
   const navigate = useNavigate();
@@ -36,7 +37,9 @@ export default function BlogIndex() {
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
       <div className="nvim-tabline">
         <div className="nvim-tab nvim-tab-active">
-          <span className="nvim-tab-icon">󰙴 </span>
+          <span className="nvim-tab-icon">
+            <SiMarkdown size={14} />
+          </span>
           <span className="nvim-tab-name">blog/index.md</span>
         </div>
         <div className="nvim-tab-spacer" />
@@ -50,7 +53,9 @@ export default function BlogIndex() {
           {blogPosts.map((post) => (
             <Link key={post.slug} to={`/blogs/${post.slug}`}
               className="nvim-tree-item" style={{ textDecoration: "none" }}>
-              <span className="tree-file-icon">󰙴 </span>
+              <span className="nvim-tab-icon">
+                <SiMarkdown size={14} />
+              </span>
               <span className="tree-file-name">{post.slug}.md</span>
             </Link>
           ))}

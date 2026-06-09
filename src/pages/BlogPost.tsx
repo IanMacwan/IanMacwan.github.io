@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { blogPosts } from "../content/blogPosts";
 import type { BlogPost as Post } from "../content/blogPosts";
 import MarkdownRenderer from "../components/MarkdownRenderer";
+import { SiMarkdown } from "react-icons/si";
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -74,7 +75,9 @@ export default function BlogPost() {
           <span className="nvim-tab-name" style={{ color: "var(--fg4)" }}>index.md</span>
         </Link>
         <div className="nvim-tab nvim-tab-active">
-          <span className="nvim-tab-icon">󰙴 </span>
+          <span className="nvim-tab-icon">
+            <SiMarkdown size={14} />
+          </span>
           <span className="nvim-tab-name">{post.slug}.md</span>
         </div>
         <div className="nvim-tab-spacer" />
@@ -96,7 +99,9 @@ export default function BlogPost() {
               className={`nvim-tree-item ${p.slug === slug ? "nvim-tree-active" : ""}`}
               style={{ textDecoration: "none" }}
             >
-              <span className="tree-file-icon">󰙴 </span>
+              <span className="nvim-tab-icon">
+                <SiMarkdown size={14} />
+              </span>
               <span className="tree-file-name">{p.slug}.md</span>
             </Link>
           ))}
