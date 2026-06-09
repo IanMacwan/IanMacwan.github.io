@@ -66,7 +66,7 @@ export default function Neofetch() {
                 </a>
               ) : label === "email" ? (
                 <a
-                  href="mailto:ianmacwan@torontomu.ca"
+                  href="mailto:ian.macwan@torontomu.ca"
                   className="nf-link nf-email"
                 >
                   {value1}
