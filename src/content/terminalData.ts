@@ -23,36 +23,6 @@ export const NEOFETCH_INFO = [
   { label: "linkedin", value1: "linkedin.com/in/ian-macwan11" },
 ];
 
-export const FEATURED_PROJECTS = [
-  {
-    title: "RootAccess",
-    href: "/projects/rootaccess",
-  },
-  {
-    title: "WaitFinder",
-    href: "/projects/waitfinder",
-  },
-  {
-    title: "Community Resource Finder",
-    href: "/projects/community-resource-finder",
-  },
-];
-
-export const FEATURED_BLOGS = [
-  {
-    title: "Building My Arch Linux Portfolio",
-    href: "/blogs/building-my-portfolio",
-  },
-  {
-    title: "Thoughts on Embedded Systems",
-    href: "/blogs/embedded-systems",
-  },
-  {
-    title: "Why I Use Neovim",
-    href: "/blogs/why-neovim",
-  },
-];
-
 export const HELP_TEXT = [
   { cmd: "about",      desc: "who am I" },
   { cmd: "projects",   desc: "things I've built" },
