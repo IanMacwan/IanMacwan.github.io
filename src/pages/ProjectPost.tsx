@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { projectPosts } from "../content/projectPosts";
 import type { ProjectPost as Post } from "../content/projectPosts";
+import MarkdownRenderer from "../components/MarkdownRenderer";
 
-export default function BlogPost() {
+export default function ProjectPost() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
@@ -23,13 +22,8 @@ export default function BlogPost() {
   useEffect(() => {
     const handle = (e: KeyboardEvent) => {
       if (cmdMode) return;
-      if (e.key === ":" && mode === "NORMAL") {
-        e.preventDefault();
-        setCmdMode(true);
-        setCmdLine(":");
-        return;
-      }
-      if (e.key === "i") { setMode("INSERT"); return; }
+      if (e.key === ":" && mode === "NORMAL") { e.preventDefault(); setCmdMode(true); setCmdLine(":"); return; }
+      if (e.key === "i")      { setMode("INSERT"); return; }
       if (e.key === "Escape") { setMode("NORMAL"); return; }
     };
     window.addEventListener("keydown", handle);
@@ -40,10 +34,9 @@ export default function BlogPost() {
     if (e.key === "Escape") { setCmdMode(false); setCmdLine(""); return; }
     if (e.key === "Enter") {
       const cmd = cmdLine.replace(/^:/, "").trim();
-      if (cmd === "q" || cmd === "q!" || cmd === "wq") navigate("/blogs");
+      if (cmd === "q" || cmd === "q!" || cmd === "wq") navigate("/projects"); // fixed: was /blogs
       if (cmd === "qa") navigate("/");
-      setCmdMode(false);
-      setCmdLine("");
+      setCmdMode(false); setCmdLine("");
     }
   };
 
@@ -64,13 +57,13 @@ export default function BlogPost() {
 
   const lineCount = post.content.split("\n").length;
   const timeStr = new Date().toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
-
   const idx = projectPosts.findIndex((p) => p.slug === slug);
   const prev = projectPosts[idx + 1];
   const next = projectPosts[idx - 1];
 
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
+      {/* Tabline */}
       <div className="nvim-tabline">
         <Link to="/projects" className="nvim-tab" style={{ textDecoration: "none" }}>
           <span className="nvim-tab-name" style={{ color: "var(--fg4)" }}>index.md</span>
@@ -80,17 +73,11 @@ export default function BlogPost() {
           <span className="nvim-tab-name">{post.slug}.md</span>
         </div>
         <div className="nvim-tab-spacer" />
-
         <button className="nvim-close-btn" onClick={copyLink} style={{ color: copied ? "var(--green)" : undefined }}>
           {copied ? "✓ copied!" : "⎘ share"}
         </button>
-
-        <Link to="/projects" className="nvim-close-btn" style={{ textDecoration: "none" }}>
-          ← projects
-        </Link>
-        <Link to="/" className="nvim-close-btn" style={{ textDecoration: "none" }}>
-          ✕ terminal
-        </Link>
+        <Link to="/projects" className="nvim-close-btn" style={{ textDecoration: "none" }}>← projects</Link>
+        <Link to="/"         className="nvim-close-btn" style={{ textDecoration: "none" }}>✕ terminal</Link>
       </div>
 
       <div className="nvim-body">
@@ -100,7 +87,7 @@ export default function BlogPost() {
           {projectPosts.map((p) => (
             <Link
               key={p.slug}
-              to={`/blogs/${p.slug}`}
+              to={`/projects/${p.slug}`}
               className={`nvim-tree-item ${p.slug === slug ? "nvim-tree-active" : ""}`}
               style={{ textDecoration: "none" }}
             >
@@ -117,24 +104,7 @@ export default function BlogPost() {
                 <div key={i} className="nvim-lnum">{i + 1}</div>
               ))}
             </div>
-            <div className="nvim-markdown-view">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {post.content}
-              </ReactMarkdown>
-
-              <div className="post-nav">
-                {prev ? (
-                  <Link to={`/blogs/${prev.slug}`} className="post-nav-btn">
-                    ← {prev.title}
-                  </Link>
-                ) : <span />}
-                {next && (
-                  <Link to={`/blogs/${next.slug}`} className="post-nav-btn post-nav-next">
-                    {next.title} →
-                  </Link>
-                )}
-              </div>
-            </div>
+            <MarkdownRenderer>{post.content}</MarkdownRenderer>
           </div>
         </div>
 
@@ -151,28 +121,22 @@ export default function BlogPost() {
           <div className="info-row">
             <span className="info-label">tags</span>
             <div className="info-tags">
-              {post.tags.map((t) => (
-                <span key={t} className="info-tag">#{t}</span>
-              ))}
+              {post.tags.map((t) => <span key={t} className="info-tag">#{t}</span>)}
             </div>
           </div>
           <div className="info-row" style={{ marginTop: "0.5rem" }}>
             <span className="info-label">link</span>
-            <button
-              onClick={copyLink}
-              className="share-link-btn"
-              style={{ color: copied ? "var(--green)" : "var(--blue)" }}
-            >
+            <button onClick={copyLink} className="share-link-btn"
+              style={{ color: copied ? "var(--green)" : "var(--blue)" }}>
               {copied ? "✓ copied!" : "copy shareable link"}
             </button>
           </div>
-
           <div className="info-divider" />
           <div className="info-panel-header" style={{ marginTop: "0.5rem" }}>ALL PROJECTS</div>
           {projectPosts.map((p) => (
             <Link
               key={p.slug}
-              to={`/blogs/${p.slug}`}
+              to={`/projects/${p.slug}`}
               className={`info-post-btn ${p.slug === slug ? "info-post-active" : ""}`}
               style={{ textDecoration: "none" }}
             >
@@ -198,16 +162,21 @@ export default function BlogPost() {
         </span>
       </div>
 
+      {(prev || next) && (
+        <div className="post-nav" style={{ padding: "0.5rem 1rem", borderTop: "1px solid var(--bg2)", background: "var(--bg-hard)", flexShrink: 0 }}>
+          {prev
+            ? <Link to={`/projects/${prev.slug}`} className="post-nav-btn">← {prev.title}</Link>
+            : <span />}
+          {next && <Link to={`/projects/${next.slug}`} className="post-nav-btn post-nav-next">{next.title} →</Link>}
+        </div>
+      )}
+
       {cmdMode && (
         <div className="nvim-cmdline">
-          <input
-            autoFocus
-            value={cmdLine}
+          <input autoFocus value={cmdLine}
             onChange={(e) => setCmdLine(e.target.value)}
             onKeyDown={handleCmdKey}
-            className="nvim-cmd-input"
-            spellCheck={false}
-          />
+            className="nvim-cmd-input" spellCheck={false} />
         </div>
       )}
     </div>

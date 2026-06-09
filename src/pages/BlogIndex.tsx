@@ -8,23 +8,12 @@ export default function BlogIndex() {
   const [cmdLine, setCmdLine] = useState("");
   const [cmdMode, setCmdMode] = useState(false);
 
-  useEffect(() => {
-    requestAnimationFrame(() => setVisible(true));
-  }, []);
+  useEffect(() => { requestAnimationFrame(() => setVisible(true)); }, []);
 
   useEffect(() => {
     const handle = (e: KeyboardEvent) => {
-      if (e.key === ":" && !cmdMode) {
-        e.preventDefault();
-        setCmdMode(true);
-        setCmdLine(":");
-        return;
-      }
-      if (e.key === "Escape") {
-        setCmdMode(false);
-        setCmdLine("");
-        return;
-      }
+      if (e.key === ":" && !cmdMode) { e.preventDefault(); setCmdMode(true); setCmdLine(":"); return; }
+      if (e.key === "Escape")        { setCmdMode(false); setCmdLine(""); return; }
     };
     window.addEventListener("keydown", handle);
     return () => window.removeEventListener("keydown", handle);
@@ -34,18 +23,12 @@ export default function BlogIndex() {
     if (e.key === "Escape") { setCmdMode(false); setCmdLine(""); return; }
     if (e.key === "Enter") {
       const cmd = cmdLine.replace(/^:/, "").trim();
-      if (cmd === "q" || cmd === "q!" || cmd === "wq" || cmd === "qa") {
-        navigate("/");
-      }
-      setCmdMode(false);
-      setCmdLine("");
+      if (cmd === "q" || cmd === "q!" || cmd === "wq" || cmd === "qa") navigate("/");
+      setCmdMode(false); setCmdLine("");
     }
   };
 
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString("en-CA", {
-    hour: "2-digit", minute: "2-digit", hour12: false,
-  });
+  const timeStr = new Date().toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
 
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
@@ -65,12 +48,8 @@ export default function BlogIndex() {
           <div className="nvim-tree-header">  EXPLORER</div>
           <div className="nvim-tree-section">blog/</div>
           {blogPosts.map((post) => (
-            <Link
-              key={post.slug}
-              to={`/blogs/${post.slug}`}
-              className="nvim-tree-item"
-              style={{ textDecoration: "none" }}
-            >
+            <Link key={post.slug} to={`/blogs/${post.slug}`}
+              className="nvim-tree-item" style={{ textDecoration: "none" }}>
               <span className="tree-file-icon">󰙴 </span>
               <span className="tree-file-name">{post.slug}.md</span>
             </Link>
@@ -86,27 +65,19 @@ export default function BlogIndex() {
             </div>
             <div className="nvim-markdown-view" style={{ paddingTop: "24px" }}>
               <h1 style={{ marginBottom: "0.25em" }}>blog/</h1>
-              <p style={{ color: "var(--fg4)", fontSize: "13px", marginBottom: "1.5em" }}>
+              <p style={{ color: "var(--fg4)", fontSize: "0.86rem", marginBottom: "1.5em" }}>
                 {blogPosts.length} posts · click any title to read · share the url to link directly
               </p>
-
               {blogPosts.map((post, i) => (
-                <Link
-                  key={post.slug}
-                  to={`/blogs/${post.slug}`}
+                <Link key={post.slug} to={`/blogs/${post.slug}`}
                   className="blog-index-card"
-                  style={{ animationDelay: `${i * 60}ms` }}
-                >
+                  style={{ animationDelay: `${i * 60}ms` }}>
                   <div className="bic-date">{post.date}</div>
                   <div className="bic-title">{post.title}</div>
                   <div className="bic-tags">
-                    {post.tags.map((t) => (
-                      <span key={t} className="info-tag">#{t}</span>
-                    ))}
+                    {post.tags.map((t) => <span key={t} className="info-tag">#{t}</span>)}
                   </div>
-                  <div className="bic-url">
-                    localhost:5173/blogs/{post.slug}
-                  </div>
+                  <div className="bic-url">ianmacwan.github.io/blogs/{post.slug}</div>
                 </Link>
               ))}
             </div>
@@ -116,12 +87,8 @@ export default function BlogIndex() {
         <div className="nvim-info-panel">
           <div className="info-panel-header">ALL POSTS</div>
           {blogPosts.map((post) => (
-            <Link
-              key={post.slug}
-              to={`/blogs/${post.slug}`}
-              className="info-post-btn"
-              style={{ textDecoration: "none" }}
-            >
+            <Link key={post.slug} to={`/blogs/${post.slug}`}
+              className="info-post-btn" style={{ textDecoration: "none" }}>
               <span className="info-post-date">{post.date}</span>
               <span className="info-post-title">{post.title}</span>
             </Link>
@@ -146,14 +113,10 @@ export default function BlogIndex() {
 
       {cmdMode && (
         <div className="nvim-cmdline">
-          <input
-            autoFocus
-            value={cmdLine}
+          <input autoFocus value={cmdLine}
             onChange={(e) => setCmdLine(e.target.value)}
             onKeyDown={handleCmdKey}
-            className="nvim-cmd-input"
-            spellCheck={false}
-          />
+            className="nvim-cmd-input" spellCheck={false} />
         </div>
       )}
     </div>

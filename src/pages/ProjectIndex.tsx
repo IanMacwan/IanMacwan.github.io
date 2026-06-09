@@ -2,29 +2,18 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { projectPosts } from "../content/projectPosts";
 
-export default function BlogIndex() {
+export default function ProjectIndex() {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [cmdLine, setCmdLine] = useState("");
   const [cmdMode, setCmdMode] = useState(false);
 
-  useEffect(() => {
-    requestAnimationFrame(() => setVisible(true));
-  }, []);
+  useEffect(() => { requestAnimationFrame(() => setVisible(true)); }, []);
 
   useEffect(() => {
     const handle = (e: KeyboardEvent) => {
-      if (e.key === ":" && !cmdMode) {
-        e.preventDefault();
-        setCmdMode(true);
-        setCmdLine(":");
-        return;
-      }
-      if (e.key === "Escape") {
-        setCmdMode(false);
-        setCmdLine("");
-        return;
-      }
+      if (e.key === ":" && !cmdMode) { e.preventDefault(); setCmdMode(true); setCmdLine(":"); return; }
+      if (e.key === "Escape")        { setCmdMode(false); setCmdLine(""); return; }
     };
     window.addEventListener("keydown", handle);
     return () => window.removeEventListener("keydown", handle);
@@ -34,18 +23,12 @@ export default function BlogIndex() {
     if (e.key === "Escape") { setCmdMode(false); setCmdLine(""); return; }
     if (e.key === "Enter") {
       const cmd = cmdLine.replace(/^:/, "").trim();
-      if (cmd === "q" || cmd === "q!" || cmd === "wq" || cmd === "qa") {
-        navigate("/");
-      }
-      setCmdMode(false);
-      setCmdLine("");
+      if (cmd === "q" || cmd === "q!" || cmd === "wq" || cmd === "qa") navigate("/");
+      setCmdMode(false); setCmdLine("");
     }
   };
 
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString("en-CA", {
-    hour: "2-digit", minute: "2-digit", hour12: false,
-  });
+  const timeStr = new Date().toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
 
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
@@ -86,10 +69,9 @@ export default function BlogIndex() {
             </div>
             <div className="nvim-markdown-view" style={{ paddingTop: "24px" }}>
               <h1 style={{ marginBottom: "0.25em" }}>projects/</h1>
-              <p style={{ color: "var(--fg4)", fontSize: "13px", marginBottom: "1.5em" }}>
-              {projectPosts.length} projects · click any title to view · share the url to link directly
+              <p style={{ color: "var(--fg4)", fontSize: "0.86rem", marginBottom: "1.5em" }}>
+                {projectPosts.length} projects · click any title to view · share the url to link directly
               </p>
-
               {projectPosts.map((post, i) => (
                 <Link
                   key={post.slug}
@@ -100,13 +82,9 @@ export default function BlogIndex() {
                   <div className="bic-date">{post.date}</div>
                   <div className="bic-title">{post.title}</div>
                   <div className="bic-tags">
-                    {post.tags.map((t) => (
-                      <span key={t} className="info-tag">#{t}</span>
-                    ))}
+                    {post.tags.map((t) => <span key={t} className="info-tag">#{t}</span>)}
                   </div>
-                  <div className="bic-url">
-                    localhost:5173/projects/{post.slug}
-                  </div>
+                  <div className="bic-url">ianmacwan.github.io/projects/{post.slug}</div>
                 </Link>
               ))}
             </div>
@@ -114,7 +92,7 @@ export default function BlogIndex() {
         </div>
 
         <div className="nvim-info-panel">
-          <div className="info-panel-header">ALL POSTS</div>
+          <div className="info-panel-header">ALL PROJECTS</div>
           {projectPosts.map((post) => (
             <Link
               key={post.slug}
@@ -146,14 +124,10 @@ export default function BlogIndex() {
 
       {cmdMode && (
         <div className="nvim-cmdline">
-          <input
-            autoFocus
-            value={cmdLine}
+          <input autoFocus value={cmdLine}
             onChange={(e) => setCmdLine(e.target.value)}
             onKeyDown={handleCmdKey}
-            className="nvim-cmd-input"
-            spellCheck={false}
-          />
+            className="nvim-cmd-input" spellCheck={false} />
         </div>
       )}
     </div>

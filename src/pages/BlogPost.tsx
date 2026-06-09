@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { blogPosts } from "../content/blogPosts";
+import { blogPosts, type BlogPost } from "../content/blogPosts";
 import type { BlogPost as Post } from "../content/blogPosts";
+import MarkdownRenderer from "../components/MarkdownRenderer";
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -29,7 +28,7 @@ export default function BlogPost() {
         setCmdLine(":");
         return;
       }
-      if (e.key === "i") { setMode("INSERT"); return; }
+      if (e.key === "i")      { setMode("INSERT"); return; }
       if (e.key === "Escape") { setMode("NORMAL"); return; }
     };
     window.addEventListener("keydown", handle);
@@ -64,13 +63,13 @@ export default function BlogPost() {
 
   const lineCount = post.content.split("\n").length;
   const timeStr = new Date().toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
-
   const idx = blogPosts.findIndex((p) => p.slug === slug);
   const prev = blogPosts[idx + 1];
   const next = blogPosts[idx - 1];
 
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
+      {/* Tabline */}
       <div className="nvim-tabline">
         <Link to="/blogs" className="nvim-tab" style={{ textDecoration: "none" }}>
           <span className="nvim-tab-name" style={{ color: "var(--fg4)" }}>index.md</span>
@@ -80,17 +79,11 @@ export default function BlogPost() {
           <span className="nvim-tab-name">{post.slug}.md</span>
         </div>
         <div className="nvim-tab-spacer" />
-
         <button className="nvim-close-btn" onClick={copyLink} style={{ color: copied ? "var(--green)" : undefined }}>
           {copied ? "✓ copied!" : "⎘ share"}
         </button>
-
-        <Link to="/blogs" className="nvim-close-btn" style={{ textDecoration: "none" }}>
-          ← blog
-        </Link>
-        <Link to="/" className="nvim-close-btn" style={{ textDecoration: "none" }}>
-          ✕ terminal
-        </Link>
+        <Link to="/blogs" className="nvim-close-btn" style={{ textDecoration: "none" }}>← blog</Link>
+        <Link to="/"      className="nvim-close-btn" style={{ textDecoration: "none" }}>✕ terminal</Link>
       </div>
 
       <div className="nvim-body">
@@ -117,24 +110,10 @@ export default function BlogPost() {
                 <div key={i} className="nvim-lnum">{i + 1}</div>
               ))}
             </div>
-            <div className="nvim-markdown-view">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {post.content}
-              </ReactMarkdown>
 
-              <div className="post-nav">
-                {prev ? (
-                  <Link to={`/blogs/${prev.slug}`} className="post-nav-btn">
-                    ← {prev.title}
-                  </Link>
-                ) : <span />}
-                {next && (
-                  <Link to={`/blogs/${next.slug}`} className="post-nav-btn post-nav-next">
-                    {next.title} →
-                  </Link>
-                )}
-              </div>
-            </div>
+            <MarkdownRenderer>
+              {post.content + (prev || next ? `\n\n---` : "")}
+            </MarkdownRenderer>
           </div>
         </div>
 
@@ -158,15 +137,11 @@ export default function BlogPost() {
           </div>
           <div className="info-row" style={{ marginTop: "0.5rem" }}>
             <span className="info-label">link</span>
-            <button
-              onClick={copyLink}
-              className="share-link-btn"
-              style={{ color: copied ? "var(--green)" : "var(--blue)" }}
-            >
+            <button onClick={copyLink} className="share-link-btn"
+              style={{ color: copied ? "var(--green)" : "var(--blue)" }}>
               {copied ? "✓ copied!" : "copy shareable link"}
             </button>
           </div>
-
           <div className="info-divider" />
           <div className="info-panel-header" style={{ marginTop: "0.5rem" }}>ALL POSTS</div>
           {blogPosts.map((p) => (
@@ -198,16 +173,21 @@ export default function BlogPost() {
         </span>
       </div>
 
+      {(prev || next) && (
+        <div className="post-nav" style={{ padding: "0.5rem 1rem", borderTop: "1px solid var(--bg2)", background: "var(--bg-hard)", flexShrink: 0 }}>
+          {prev
+            ? <Link to={`/blogs/${prev.slug}`} className="post-nav-btn">← {prev.title}</Link>
+            : <span />}
+          {next && <Link to={`/blogs/${next.slug}`} className="post-nav-btn post-nav-next">{next.title} →</Link>}
+        </div>
+      )}
+
       {cmdMode && (
         <div className="nvim-cmdline">
-          <input
-            autoFocus
-            value={cmdLine}
+          <input autoFocus value={cmdLine}
             onChange={(e) => setCmdLine(e.target.value)}
             onKeyDown={handleCmdKey}
-            className="nvim-cmd-input"
-            spellCheck={false}
-          />
+            className="nvim-cmd-input" spellCheck={false} />
         </div>
       )}
     </div>
