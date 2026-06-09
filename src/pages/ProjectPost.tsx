@@ -63,7 +63,6 @@ export default function ProjectPost() {
 
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
-      {/* Tabline */}
       <div className="nvim-tabline">
         <Link to="/projects" className="nvim-tab" style={{ textDecoration: "none" }}>
           <span className="nvim-tab-name" style={{ color: "var(--fg4)" }}>index.md</span>
@@ -99,11 +98,6 @@ export default function ProjectPost() {
 
         <div className="nvim-editor-area" tabIndex={0}>
           <div className="nvim-content-wrap">
-            <div className="nvim-line-numbers">
-              {post.content.split("\n").map((_, i) => (
-                <div key={i} className="nvim-lnum">{i + 1}</div>
-              ))}
-            </div>
             <MarkdownRenderer>{post.content}</MarkdownRenderer>
           </div>
         </div>

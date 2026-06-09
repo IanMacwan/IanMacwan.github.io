@@ -30,6 +30,8 @@ export default function BlogIndex() {
 
   const timeStr = new Date().toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
 
+  // const rows = blogPosts.length + 2;
+
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
       <div className="nvim-tabline">
@@ -38,9 +40,7 @@ export default function BlogIndex() {
           <span className="nvim-tab-name">blog/index.md</span>
         </div>
         <div className="nvim-tab-spacer" />
-        <Link to="/" className="nvim-close-btn" style={{ textDecoration: "none" }}>
-          ✕ :q (terminal)
-        </Link>
+        <Link to="/" className="nvim-close-btn" style={{ textDecoration: "none" }}>✕ :q (terminal)</Link>
       </div>
 
       <div className="nvim-body">
@@ -58,14 +58,17 @@ export default function BlogIndex() {
 
         <div className="nvim-editor-area" tabIndex={0}>
           <div className="nvim-content-wrap">
-            <div className="nvim-line-numbers">
-              {Array.from({ length: blogPosts.length + 6 }, (_, i) => (
-                <div key={i} className="nvim-lnum">{i + 1}</div>
+            <div className="md-gutter">
+              {Array.from({ length: 15 }, (_, i) => (
+                <div key={i} className="md-lnum">
+                  {i + 1}
+                </div>
               ))}
             </div>
-            <div className="nvim-markdown-view" style={{ paddingTop: "24px" }}>
-              <h1 style={{ marginBottom: "0.25em" }}>blog/</h1>
-              <p style={{ color: "var(--fg4)", fontSize: "0.86rem", marginBottom: "1.5em" }}>
+
+            <div className="index-content">
+              <h1 className="index-heading">blog/</h1>
+              <p className="index-subheading">
                 {blogPosts.length} posts · click any title to read · share the url to link directly
               </p>
               {blogPosts.map((post, i) => (

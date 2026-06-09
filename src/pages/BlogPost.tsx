@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { blogPosts, type BlogPost } from "../content/blogPosts";
+import { blogPosts } from "../content/blogPosts";
 import type { BlogPost as Post } from "../content/blogPosts";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 
@@ -69,7 +69,6 @@ export default function BlogPost() {
 
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
-      {/* Tabline */}
       <div className="nvim-tabline">
         <Link to="/blogs" className="nvim-tab" style={{ textDecoration: "none" }}>
           <span className="nvim-tab-name" style={{ color: "var(--fg4)" }}>index.md</span>
@@ -105,12 +104,6 @@ export default function BlogPost() {
 
         <div className="nvim-editor-area" tabIndex={0}>
           <div className="nvim-content-wrap">
-            <div className="nvim-line-numbers">
-              {post.content.split("\n").map((_, i) => (
-                <div key={i} className="nvim-lnum">{i + 1}</div>
-              ))}
-            </div>
-
             <MarkdownRenderer>
               {post.content + (prev || next ? `\n\n---` : "")}
             </MarkdownRenderer>

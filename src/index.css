@@ -43,7 +43,7 @@ html, body, #root {
 body {
   background: var(--bg-hard);
   color: var(--fg1);
-  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  font-family: "Cascadia Code", "Cascadia Mono", "JetBrains Mono", monospace;
   font-size: 1rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -98,22 +98,13 @@ body {
   overflow: hidden;
 }
 
-.term-boot { opacity: 0; }
-.term-boot-in { animation: termBoot 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.term-boot     { opacity: 0; }
+.term-boot-in  { animation: termBoot 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-.line-fade-in {
-  opacity: 0;
-  animation: lineFadeIn 0.18s ease forwards;
-}
-.ascii-line { display: block; }
-.ascii-line-in {
-  opacity: 0;
-  animation: asciiSlideIn 0.18s ease forwards;
-}
-.nf-row-in {
-  opacity: 0;
-  animation: nfRowIn 0.2s ease forwards;
-}
+.line-fade-in  { opacity: 0; animation: lineFadeIn 0.18s ease forwards; }
+.ascii-line    { display: block; }
+.ascii-line-in { opacity: 0; animation: asciiSlideIn 0.18s ease forwards; }
+.nf-row-in     { opacity: 0; animation: nfRowIn 0.2s ease forwards; }
 
 .terminal-root {
   display: flex;
@@ -227,9 +218,9 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.help-row   { display: flex; gap: 1rem; margin-bottom: 0.14rem; }
-.help-cmd   { color: var(--yellow); min-width: 5rem; flex-shrink: 0; }
-.help-desc  { color: var(--fg4); }
+.help-row  { display: flex; gap: 1rem; margin-bottom: 0.14rem; }
+.help-cmd  { color: var(--yellow); min-width: 5rem; flex-shrink: 0; }
+.help-desc { color: var(--fg4); }
 
 .neofetch-block  { margin: 0.19rem 0 0.95rem; }
 .neofetch-inner  { display: flex; gap: 2.5rem; align-items: flex-start; flex-wrap: wrap; }
@@ -242,16 +233,17 @@ body {
   flex-shrink: 0;
   user-select: none;
 }
-.neofetch-info   { flex: 1; min-width: 13rem; }
+.neofetch-info     { flex: 1; min-width: 13rem; }
 .neofetch-username { margin-bottom: 0.1rem; }
 .nf-user { color: var(--green); font-weight: 700; }
 .nf-at   { color: var(--fg4); }
 .nf-host { color: var(--green); font-weight: 700; }
 .nf-separator { color: var(--bg3); margin: 0.19rem 0; font-size: 0.76rem; }
-.nf-row  { display: flex; margin-bottom: 0.05rem; }
+.nf-row   { display: flex; margin-bottom: 0.05rem; }
 .nf-label { color: var(--blue); min-width: 4.5rem; font-weight: 600; }
 .nf-colon { color: var(--fg4); margin-right: 0.5rem; }
 .nf-value { color: var(--fg2); }
+
 .nf-link {
   text-decoration: none;
   transition: opacity 0.15s ease;
@@ -260,27 +252,13 @@ body {
   text-decoration: underline;
   opacity: 0.85;
 }
-.nf-github {
-  color: var(--green);
-}
-.nf-linkedin {
-  color: var(--purple);
-}
-.nf-email {
-  color: var(--orange);
-}
-.nf-proj {
-  color: var(--red);
-}
-.nf-label-projects {
-  color: var(--aqua);
-}
-.nf-blog {
-  color: var(--yellow);
-}
-.nf-label-blog {
-  color: var(--aqua);
-}
+.nf-github   { color: var(--green); }
+.nf-linkedin { color: var(--purple); }
+.nf-email    { color: var(--orange); }
+.nf-proj     { color: var(--red); }
+.nf-label-projects { color: var(--aqua); }
+.nf-blog     { color: var(--yellow); }
+.nf-label-blog     { color: var(--aqua); }
 
 .nf-palette { display: flex; gap: 0.14rem; margin-top: 0.38rem; }
 .pal-block {
@@ -341,10 +319,10 @@ body {
   transition: background 0.12s, color 0.12s;
   text-decoration: none;
 }
-.nvim-tab:hover       { background: var(--bg1); color: var(--fg2); }
-.nvim-tab-active      { background: var(--bg0); color: var(--fg0); border-top: 1px solid var(--yellow-dim); }
-.nvim-tab-icon        { color: var(--blue); }
-.nvim-tab-spacer      { flex: 1; }
+.nvim-tab:hover    { background: var(--bg1); color: var(--fg2); }
+.nvim-tab-active   { background: var(--bg0); color: var(--fg0); border-top: 1px solid var(--yellow-dim); }
+.nvim-tab-icon     { color: var(--blue); }
+.nvim-tab-spacer   { flex: 1; }
 .nvim-tab-close {
   background: none;
   border: none;
@@ -435,62 +413,125 @@ body {
 .nvim-content-wrap::-webkit-scrollbar-track { background: transparent; }
 .nvim-content-wrap::-webkit-scrollbar-thumb { background: var(--bg2); border-radius: 0.1rem; }
 
-.nvim-line-numbers {
-  padding: 0.76rem 0.38rem 0.76rem 0.29rem;
-  min-width: 2.5rem;
-  text-align: right;
-  background: var(--bg0);
-  border-right: 1px solid var(--bg1);
-  user-select: none;
-  flex-shrink: 0;
-}
-.nvim-lnum {
-  color: var(--bg3);
-  font-size: 0.71rem;
-  line-height: 1.6;
-  height: 1.6em;
-}
+.nvim-line-numbers { display: none; }
 
 .nvim-markdown-view {
   flex: 1;
-  padding: 0.76rem 1.14rem 2rem;
   overflow-y: auto;
   color: var(--fg1);
-  line-height: 1.65;
   font-size: 1rem;
+  line-height: 1.65;
+  padding: 0;
 }
+
+.md-row {
+  display: flex;
+  align-items: stretch;
+  min-height: 1.65em;
+}
+.md-row:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.md-gutter {
+  flex-shrink: 0;
+  width: 2rem;
+  background: var(--bg0);
+  border-right: 1px solid var(--bg1);
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  pointer-events: none;
+}
+.md-lnum {
+  color: var(--bg3);
+  font-size: 0.67rem;
+  line-height: 1.65;
+  height: 1.65em;
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.md-content {
+  flex: 1;
+  padding: 0.1em 1.5rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.md-blank {
+  height: 1.65em;
+}
+
+.md-hr {
+  border: none;
+  border-top: 1px solid var(--bg2);
+  margin: 0.3em 0;
+}
+
+.md-row-code .md-gutter {
+  background: var(--bg0);
+}
+.md-row-code .md-lnum {
+  color: var(--bg2);
+}
+.md-row-code .md-content {
+  padding: 0 1.5rem;
+  background: transparent;
+}
+.md-code-block {
+  background: var(--bg-hard);
+  border: 1px solid var(--bg2);
+  border-left: 3px solid var(--bg3);
+  border-radius: 0.19rem;
+  overflow: hidden;
+  margin: 0.25em 0;
+}
+.md-code-block > div,
+.md-code-block > div > div,
+.md-code-block pre,
+.md-code-block code {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+.md-code-block > div {
+  padding: 0.5rem 0.75rem !important;
+}
+
 .nvim-markdown-view h1 {
   color: var(--yellow); font-size: 1.4em; font-weight: 700;
-  margin: 0 0 0.5em; padding-bottom: 0.3em; border-bottom: 1px solid var(--bg2);
+  margin: 0.1em 0 0.3em; padding-bottom: 0.2em;
+  border-bottom: 1px solid var(--bg2);
 }
 .nvim-markdown-view h2 {
-  color: var(--aqua); font-size: 1.1em; font-weight: 600; margin: 1.2em 0 0.4em;
+  color: var(--aqua); font-size: 1.1em; font-weight: 600;
+  margin: 0.3em 0 0.1em;
 }
 .nvim-markdown-view h3 {
-  color: var(--blue); font-size: 1em; font-weight: 600; margin: 1em 0 0.3em;
+  color: var(--blue); font-size: 1em; font-weight: 600;
+  margin: 0.2em 0 0.1em;
 }
-.nvim-markdown-view p    { color: var(--fg2); margin: 0.4em 0 0.8em; }
+.nvim-markdown-view p      { color: var(--fg2); margin: 0.1em 0; }
+.nvim-markdown-view span   { color: var(--fg2); }
 .nvim-markdown-view ul,
-.nvim-markdown-view ol   { color: var(--fg2); padding-left: 1.4em; margin: 0.4em 0; }
-.nvim-markdown-view li   { margin: 0.15em 0; }
+.nvim-markdown-view ol     { color: var(--fg2); padding-left: 1.4em; margin: 0; }
+.nvim-markdown-view li     { margin: 0.1em 0; }
 .nvim-markdown-view strong { color: var(--fg0); font-weight: 700; }
-.nvim-markdown-view em    { color: var(--purple); }
-.nvim-markdown-view code  {
+.nvim-markdown-view em     { color: var(--purple); }
+.nvim-markdown-view code {
   background: var(--bg1); color: var(--orange);
   padding: 0.05em 0.24em; border-radius: 0.14rem; font-size: 0.9em;
 }
-.nvim-markdown-view pre {
-  background: var(--bg-hard); border: 1px solid var(--bg2);
-  border-radius: 0.19rem; padding: 0.57rem 0.67rem; overflow-x: auto; margin: 0.8em 0;
-}
-.nvim-markdown-view pre code {
-  background: none; color: var(--fg1); padding: 0; border-radius: 0; font-size: 0.86rem;
-}
 .nvim-markdown-view blockquote {
-  border-left: 3px solid var(--yellow-dim); margin: 0.8em 0;
-  padding: 0.2em 0.8em; color: var(--fg4);
+  border-left: 3px solid var(--yellow-dim);
+  margin: 0.1em 0;
+  padding: 0.1em 0.8em;
+  color: var(--fg4);
 }
-.nvim-markdown-view table { border-collapse: collapse; width: 100%; margin: 0.8em 0; }
+.nvim-markdown-view table { border-collapse: collapse; width: 100%; margin: 0.3em 0; }
 .nvim-markdown-view th {
   background: var(--bg1); color: var(--fg0);
   padding: 0.29rem 0.48rem; border: 1px solid var(--bg2); text-align: left;
@@ -499,6 +540,26 @@ body {
   padding: 0.24rem 0.48rem; border: 1px solid var(--bg2); color: var(--fg2);
 }
 .nvim-markdown-view a { color: var(--blue); text-decoration: underline; }
+
+.index-content {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  min-width: 0;
+  overflow-y: auto;
+}
+.index-heading {
+  color: var(--yellow);
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 0 0 0.25em;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid var(--bg2);
+}
+.index-subheading {
+  color: var(--fg4);
+  font-size: 0.86rem;
+  margin: 0 0 1.2em;
+}
 
 .blog-index-card {
   display: block;
@@ -518,10 +579,10 @@ body {
   background: var(--bg1);
   transform: translateX(3px);
 }
-.bic-date  { color: var(--fg4);  font-size: 0.67rem; margin-bottom: 0.14rem; }
-.bic-title { color: var(--fg0);  font-size: 1rem;    font-weight: 600; margin-bottom: 0.24rem; }
+.bic-date  { color: var(--fg4); font-size: 0.67rem; margin-bottom: 0.14rem; }
+.bic-title { color: var(--fg0); font-size: 1rem;    font-weight: 600; margin-bottom: 0.24rem; }
 .bic-tags  { display: flex; gap: 0.24rem; flex-wrap: wrap; margin-bottom: 0.29rem; }
-.bic-url   { color: var(--bg3);  font-size: 0.67rem; transition: color 0.1s; }
+.bic-url   { color: var(--bg3); font-size: 0.67rem; transition: color 0.1s; }
 .blog-index-card:hover .bic-url { color: var(--blue); }
 
 .post-nav {
@@ -542,8 +603,8 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.post-nav-btn:hover  { color: var(--yellow); }
-.post-nav-next       { text-align: right; }
+.post-nav-btn:hover { color: var(--yellow); }
+.post-nav-next      { text-align: right; }
 
 .share-link-btn {
   background: none;
@@ -582,7 +643,7 @@ body {
   gap: 0.05rem;
   margin-bottom: 0.19rem;
 }
-.info-label {
+.info-label  {
   color: var(--fg4);
   font-size: 0.62rem;
   text-transform: uppercase;
@@ -643,15 +704,15 @@ body {
 }
 .nvim-mode-normal { background: var(--blue-dim);  color: var(--bg-hard); }
 .nvim-mode-insert { background: var(--green-dim); color: var(--bg-hard); }
-.nvim-sl-file         { color: var(--fg2);    padding: 0 0.38rem; }
-.nvim-sl-branch       { color: var(--purple); padding-right: 0.1rem; }
-.nvim-sl-branch-name  { color: var(--purple); }
-.nvim-sl-spacer       { flex: 1; }
-.nvim-sl-right        { display: flex; align-items: center; padding: 0 0.48rem; color: var(--fg4); }
-.nvim-sl-ft           { color: var(--aqua); }
-.nvim-sl-sep          { color: var(--bg3); margin: 0 0.19rem; }
-.nvim-sl-pos          { color: var(--fg3); }
-.nvim-sl-time         { color: var(--fg4); }
+.nvim-sl-file        { color: var(--fg2);    padding: 0 0.38rem; }
+.nvim-sl-branch      { color: var(--purple); padding-right: 0.1rem; }
+.nvim-sl-branch-name { color: var(--purple); }
+.nvim-sl-spacer      { flex: 1; }
+.nvim-sl-right       { display: flex; align-items: center; padding: 0 0.48rem; color: var(--fg4); }
+.nvim-sl-ft          { color: var(--aqua); }
+.nvim-sl-sep         { color: var(--bg3); margin: 0 0.19rem; }
+.nvim-sl-pos         { color: var(--fg3); }
+.nvim-sl-time        { color: var(--fg4); }
 
 .nvim-cmdline {
   background: var(--bg-hard);
@@ -669,4 +730,3 @@ body {
   width: 100%;
   caret-color: var(--yellow);
 }
-

@@ -30,6 +30,8 @@ export default function ProjectIndex() {
 
   const timeStr = new Date().toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
 
+  // const rows = projectPosts.length + 2;
+
   return (
     <div className={`nvim-overlay ${visible ? "nvim-visible" : ""}`}>
       <div className="nvim-tabline">
@@ -38,9 +40,7 @@ export default function ProjectIndex() {
           <span className="nvim-tab-name">projects/index.md</span>
         </div>
         <div className="nvim-tab-spacer" />
-        <Link to="/" className="nvim-close-btn" style={{ textDecoration: "none" }}>
-          ✕ :q (terminal)
-        </Link>
+        <Link to="/" className="nvim-close-btn" style={{ textDecoration: "none" }}>✕ :q (terminal)</Link>
       </div>
 
       <div className="nvim-body">
@@ -48,12 +48,8 @@ export default function ProjectIndex() {
           <div className="nvim-tree-header">  EXPLORER</div>
           <div className="nvim-tree-section">projects/</div>
           {projectPosts.map((post) => (
-            <Link
-              key={post.slug}
-              to={`/projects/${post.slug}`}
-              className="nvim-tree-item"
-              style={{ textDecoration: "none" }}
-            >
+            <Link key={post.slug} to={`/projects/${post.slug}`}
+              className="nvim-tree-item" style={{ textDecoration: "none" }}>
               <span className="tree-file-icon">󰙴 </span>
               <span className="tree-file-name">{post.slug}.md</span>
             </Link>
@@ -62,23 +58,23 @@ export default function ProjectIndex() {
 
         <div className="nvim-editor-area" tabIndex={0}>
           <div className="nvim-content-wrap">
-            <div className="nvim-line-numbers">
-              {Array.from({ length: projectPosts.length + 6 }, (_, i) => (
-                <div key={i} className="nvim-lnum">{i + 1}</div>
+            <div className="md-gutter">
+              {Array.from({ length: 15 }, (_, i) => (
+                <div key={i} className="md-lnum">
+                  {i + 1}
+                </div>
               ))}
             </div>
-            <div className="nvim-markdown-view" style={{ paddingTop: "24px" }}>
-              <h1 style={{ marginBottom: "0.25em" }}>projects/</h1>
-              <p style={{ color: "var(--fg4)", fontSize: "0.86rem", marginBottom: "1.5em" }}>
+
+            <div className="index-content">
+              <h1 className="index-heading">projects/</h1>
+              <p className="index-subheading">
                 {projectPosts.length} projects · click any title to view · share the url to link directly
               </p>
               {projectPosts.map((post, i) => (
-                <Link
-                  key={post.slug}
-                  to={`/projects/${post.slug}`}
+                <Link key={post.slug} to={`/projects/${post.slug}`}
                   className="blog-index-card"
-                  style={{ animationDelay: `${i * 60}ms` }}
-                >
+                  style={{ animationDelay: `${i * 60}ms` }}>
                   <div className="bic-date">{post.date}</div>
                   <div className="bic-title">{post.title}</div>
                   <div className="bic-tags">
@@ -94,12 +90,8 @@ export default function ProjectIndex() {
         <div className="nvim-info-panel">
           <div className="info-panel-header">ALL PROJECTS</div>
           {projectPosts.map((post) => (
-            <Link
-              key={post.slug}
-              to={`/projects/${post.slug}`}
-              className="info-post-btn"
-              style={{ textDecoration: "none" }}
-            >
+            <Link key={post.slug} to={`/projects/${post.slug}`}
+              className="info-post-btn" style={{ textDecoration: "none" }}>
               <span className="info-post-date">{post.date}</span>
               <span className="info-post-title">{post.title}</span>
             </Link>
