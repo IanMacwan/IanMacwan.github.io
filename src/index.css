@@ -697,6 +697,13 @@ body {
   letter-spacing: 0.06em;
 }
 .info-value  { color: var(--fg2); font-size: 0.71rem; word-break: break-word; }
+.info-value-link { 
+  color: var(--blue);
+  font-size: 0.71rem;
+  word-break: break-word;
+  cursor: pointer; 
+  text-decoration: underline;
+}
 .info-tags   { display: flex; flex-wrap: wrap; gap: 0.19rem; margin-top: 0.1rem; }
 .info-tag    {
   background: var(--bg2); color: var(--aqua);

@@ -126,6 +126,10 @@ export default function BlogPost() {
             <span className="info-value">{post.date}</span>
           </div>
           <div className="info-row">
+            <span className="info-label">github</span>
+            <a href={post.link} target="_blank" rel="noopener noreferrer" className="info-value-link">{post.link}</a>
+          </div>
+          <div className="info-row">
             <span className="info-label">tags</span>
             <div className="info-tags">
               {post.tags.map((t) => (

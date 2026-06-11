@@ -2,6 +2,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  link: string;
   tags: string[];
   content: string;
 }
@@ -11,6 +12,7 @@ export const blogPosts: BlogPost[] = [
     slug: "tcpip-stack",
     title: "Building a Userspace TCP/IP Stack",
     date: "2026-6-10",
+    link: "https://github.com/IanMacwan/bananatcp",
     tags: ["c", "networking", "tcp-ip"],
     content: `# Building a Userspace TCP/IP Stack
 **Development log for building a TCP/IP stack in userspace using C and Linux networking.**
