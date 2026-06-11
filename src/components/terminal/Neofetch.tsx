@@ -95,7 +95,7 @@ export default function Neofetch() {
               ) : label === "blog" ? (
                 <>
                   <a
-                    href="/blogs/test-blog"
+                    href="/blogs/tcpip-stack"
                     className="nf-link nf-blog"
                   >
                     {value1}
