@@ -80,7 +80,7 @@ export default function Terminal() {
         addOutput("about.md  projects.md  experience.md  blog.md  contact.md", "text");
         break;
       case "pwd":
-        addOutput("/home/ian/portfolio", "text");
+        addOutput("~/home", "text");
         break;
       case "whoami":
         addOutput("ian", "text");
@@ -104,7 +104,7 @@ export default function Terminal() {
           <span className="dot dot-yellow" />
           <span className="dot dot-green" />
         </div>
-        <span className="chrome-title">ianmacwan@arch — ~/portfolio — zsh</span>
+        <span className="chrome-title">ianmacwan@portfolio — ~/home — zsh</span>
         <span className="chrome-spacer" />
       </div>
 

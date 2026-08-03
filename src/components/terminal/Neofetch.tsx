@@ -21,9 +21,9 @@ export default function Neofetch() {
 
         <div className="neofetch-info">
           <div className="neofetch-username nf-row-in" style={{ animationDelay: "60ms" }}>
-            <span className="nf-user">ianmacwan</span>
+            <span className="nf-user">ian</span>
             <span className="nf-at">@</span>
-            <span className="nf-host">archlinux</span>
+            <span className="nf-host">portfolio</span>
           </div>
           <div className="nf-separator nf-row-in" style={{ animationDelay: "100ms" }}>
             {"─".repeat(32)}

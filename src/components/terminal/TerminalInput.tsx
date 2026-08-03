@@ -50,9 +50,9 @@ export default function TerminalInput({ onCommand }: Props) {
     <div className="term-input-row" onClick={() => inputRef.current?.focus()}>
       <span className="prompt-user">ian</span>
       <span className="prompt-at">@</span>
-      <span className="prompt-host">arch</span>
+      <span className="prompt-host">portfolio</span>
       <span className="prompt-sep"> </span>
-      <span className="prompt-path">~/portfolio</span>
+      <span className="prompt-path">~/home</span>
       <span className="prompt-git"> (main)</span>
       <span className="prompt-arrow"> ❯ </span>
       <input
