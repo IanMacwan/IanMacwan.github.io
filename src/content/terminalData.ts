@@ -13,14 +13,41 @@ export const ASCII_ART = `
  ██▀██  ▀█▄██ ██ ██  
 `.trim();
 
-export const NEOFETCH_INFO = [
-  { label: "name",     value1: "Ian Macwan" },
-  { label: "role",     value1: "Embedded Systems + Firmware + Software Developer" },
-  { label: "github",   value1: "github.com/IanMacwan" },
-  { label: "email",    value1: "ian.macwan@torontomu.ca" },
-  { label: "linkedin", value1: "linkedin.com/in/ian-macwan11" },
-  { label: "blog",     value1: "Building a Userspace TCP/IP Stack", value2: "blog1", value3: "blog3" },
-  { label: "projects", value1: "proj1", value2: "proj1", value3: "proj3" },
+
+export const TAGLINE = "Embedded Systems · Firmware · Software";
+
+export const LINKS = {
+  github:   { label: "github",                   href: "https://github.com/IanMacwan" },
+  linkedin: { label: "linkedin",                 href: "https://linkedin.com/in/ian-macwan11" },
+  email:    { label: "ian.macwan@torontomu.ca",  href: "mailto:ian.macwan@torontomu.ca" },
+  resume:   { label: "resume",                   href: "/resume.pdf" },
+};
+
+export const FEATURED_PROJECTS = [
+  {
+    href: "/projects/test-proj",
+    name: "userspace-tcpip",
+    desc: "TCP/IP stack implemented in userspace",
+    tech: ["C", "Linux"],
+  },
+  {
+    href: "/projects/test-proj",
+    name: "project-two",
+    desc: "Short one-line description",
+    tech: ["C++", "ARM"],
+  },
+  {
+    href: "/projects/test-proj",
+    name: "project-three",
+    desc: "Short one-line description",
+    tech: ["Rust", "Linux"],
+  },
+];
+
+export const FEATURED_BLOGS = [
+  { href: "/blogs/tcpip-stack", title: "Building a Userspace TCP/IP Stack" },
+  { href: "/blogs/test-blog",   title: "Another technical post" },
+  { href: "/blogs/test-blog",   title: "Another post" },
 ];
 
 export const HELP_TEXT = [

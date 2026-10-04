@@ -30,8 +30,7 @@
   --yellow-dim:#d79921;
   --blue-dim:  #458588;
 
-  /* Single knob — change this to resize everything */
-  font-size: 21px;
+  font-size: 23px;
 }
 
 /* ─── Base ──────────────────────────────────────────── */
@@ -237,7 +236,7 @@ body {
 
 /* ─── Neofetch ──────────────────────────────────────── */
 .neofetch-block  { margin: 0.19rem 0 0.95rem; }
-.neofetch-inner  { display: flex; gap: 2.5rem; align-items: flex-start; flex-wrap: wrap; }
+.neofetch-inner  { display: flex; gap: 2.5rem; align-items: stretch; flex-wrap: wrap; }
 
 .ascii-art {
   color: var(--yellow);
@@ -247,16 +246,63 @@ body {
   flex-shrink: 0;
   user-select: none;
 }
-.neofetch-info     { flex: 1; min-width: 13rem; }
+.neofetch-info {
+  flex: 1;
+  min-width: 13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
 .neofetch-username { margin-bottom: 0.1rem; }
 .nf-user { color: var(--green); font-weight: 700; }
 .nf-at   { color: var(--fg4); }
 .nf-host { color: var(--green); font-weight: 700; }
-.nf-separator { color: var(--bg3); margin: 0.19rem 0; font-size: 0.76rem; }
+.nf-separator { color: var(--bg3); margin: 0; font-size: 0.6rem; line-height: 1; }
 .nf-row   { display: flex; margin-bottom: 0.05rem; }
 .nf-label { color: var(--blue); min-width: 4.5rem; font-weight: 600; }
 .nf-colon { color: var(--fg4); margin-right: 0.5rem; }
 .nf-value { color: var(--fg2); }
+
+/* Divider between tagline/contact and the featured sections */
+
+/* Featured projects / blogs */
+/* Featured sections, stacked */
+.nf-featured     { display: flex; flex-direction: column; gap: 0.45rem; }
+.nf-section      { min-width: 0; }
+.nf-section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 0.15rem; }
+.nf-section-title { font-weight: 700; letter-spacing: 0.02em; }
+.nf-star         { color: var(--yellow); margin-right: 0.45rem; }
+.nf-more         { color: var(--fg4); font-size: 0.85em; }
+.nf-more:hover   { color: var(--aqua); }
+
+.nf-item         { margin-bottom: 0.15rem; padding-left: 0.2rem; }
+.nf-item-title   { font-weight: 600; }
+.nf-arrow        { color: var(--fg4); margin-right: 0.15rem; transition: color 0.15s; }
+.nf-item-title:hover .nf-arrow { color: var(--green); }
+.nf-item-desc    { color: var(--fg4); font-size: 0.9em; line-height: 1.25; }
+
+/* Projects: name and description share one row, aligned in two columns */
+.nf-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1.6rem;
+  align-items: baseline;
+  row-gap: 0.1rem;
+}
+.nf-list .nf-item       { display: contents; }
+.nf-list .nf-item-title { padding-left: 0.2rem; }
+.nf-item-dot     { color: var(--bg3); }
+.nf-tech         { color: var(--aqua); }
+
+/* Tagline (replaces name / role rows) */
+.nf-tagline { color: var(--fg2); }
+
+/* Bracket links (replace github / email / linkedin rows) */
+.nf-links   { display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; }
+.nf-bracket { color: var(--fg4); }
 
 /* Neofetch link styles (your custom additions) */
 .nf-link {
@@ -270,12 +316,13 @@ body {
 .nf-github   { color: var(--green); }
 .nf-linkedin { color: var(--purple); }
 .nf-email    { color: var(--orange); }
+.nf-resume   { color: var(--blue); }
 .nf-proj     { color: var(--red); }
 .nf-label-projects { color: var(--aqua); }
 .nf-blog     { color: var(--yellow); }
 .nf-label-blog     { color: var(--aqua); }
 
-.nf-palette { display: flex; gap: 0.14rem; margin-top: 0.38rem; }
+.nf-palette { display: flex; gap: 0.14rem; }
 .pal-block {
   width: 1rem;
   height: 1rem;
@@ -291,6 +338,12 @@ body {
 .pal-purple { background: var(--purple); }
 .pal-aqua   { background: var(--aqua); }
 .pal-orange { background: var(--orange); }
+
+@media (max-width: 768px) {
+  /* Narrow screens: description drops under the project name */
+  .nf-list { grid-template-columns: 1fr; row-gap: 0; }
+  .nf-list .nf-item-desc { padding-left: 1.7ch; margin-bottom: 0.3rem; }
+}
 
 .nf-help-hint { margin-top: 0.48rem; color: var(--fg4); font-size: 0.86rem; }
 .hint-label { color: var(--aqua); }
