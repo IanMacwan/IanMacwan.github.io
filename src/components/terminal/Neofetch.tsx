@@ -97,10 +97,10 @@ export default function Neofetch() {
           >
             <div className="nf-section-head">
               <a href="/projects" className="nf-link nf-section-title nf-label-projects">
-                <span className="nf-star">★</span>featured projects
+                <span className="nf-prompt">$</span> ls featured/projects
               </a>
               <a href="/projects" className="nf-link nf-more">
-                view all →
+                [more]
               </a>
             </div>
 
@@ -108,7 +108,7 @@ export default function Neofetch() {
             {FEATURED_PROJECTS.map(({ href, name, desc, tech }) => (
               <div key={name} className="nf-item">
                 <a href={href} className="nf-link nf-item-title nf-proj">
-                  <span className="nf-arrow">→</span> {name}
+                  <span className="nf-arrow">&gt;</span> {name}
                 </a>
                 <div className="nf-item-desc">
                   {desc}
@@ -127,17 +127,17 @@ export default function Neofetch() {
           >
             <div className="nf-section-head">
               <a href="/blogs" className="nf-link nf-section-title nf-label-blog">
-                <span className="nf-star">★</span>featured blogs
+                <span className="nf-prompt">$</span> ls featured/blogs
               </a>
               <a href="/blogs" className="nf-link nf-more">
-                view all →
+                [more]
               </a>
             </div>
 
             {FEATURED_BLOGS.map(({ href, title }) => (
               <div key={title} className="nf-item">
                 <a href={href} className="nf-link nf-item-title nf-blog">
-                  <span className="nf-arrow">→</span> {title}
+                  <span className="nf-arrow">&gt;</span> {title}
                 </a>
               </div>
             ))}
@@ -151,15 +151,6 @@ export default function Neofetch() {
             }}
           >
             {"─".repeat(32)}
-          </div>
-
-          <div
-            className="nf-palette nf-row-in"
-            style={{ animationDelay: `${SECTION_DELAY + 30 + TOTAL_ROWS * ROW_STEP}ms` }}
-          >
-            {["bg1","red","green","yellow","blue","purple","aqua","orange"].map((c) => (
-              <span key={c} className={`pal-block pal-${c}`} />
-            ))}
           </div>
         </div>
       </div>
