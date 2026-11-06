@@ -571,6 +571,16 @@ body {
 .md-code-block > div {
   padding: 0.5rem 0.75rem !important;
 }
+/* Match code text size to the regular markdown text (overrides highlighter inline styles) */
+.md-code-block,
+.md-code-block > div,
+.md-code-block pre,
+.md-code-block code,
+.md-code-block span {
+  font-family: var(--font-mono) !important;
+  font-size: 0.82rem !important;
+  line-height: 1.5 !important;
+}
 
 /* ─── Markdown element styles ───────────────────────── */
 .nvim-markdown-view h1 {
@@ -832,12 +842,13 @@ body {
 /* ─── CRT effect ────────────────────────────────────── */
 /* Pure-CSS overlay on .app-root: scanlines, vignette, rolling band,
    phosphor glow and a faint flicker. Add class "crt-off" to .app-root
-   to disable it. */
+   to disable it.
+   Tuned to be subtle: tweak the alpha values below to dial it up or down. */
 @keyframes crtFlicker {
   0%, 100% { opacity: 1; }
-  4%       { opacity: 0.985; }
+  4%       { opacity: 0.996; }
   8%       { opacity: 1; }
-  52%      { opacity: 0.99; }
+  52%      { opacity: 0.997; }
   54%      { opacity: 1; }
 }
 @keyframes crtRoll {
@@ -850,8 +861,8 @@ body {
   /* soft phosphor glow on all text, tinted by each element's own color */
   /* sized in em so the glow scales with the text (desktop and mobile look alike) */
   text-shadow:
-    0 0 0.12em color-mix(in srgb, currentColor 45%, transparent),
-    0 0 0.35em color-mix(in srgb, currentColor 22%, transparent);
+    0 0 0.1em color-mix(in srgb, currentColor 20%, transparent),
+    0 0 0.3em color-mix(in srgb, currentColor 8%, transparent);
 }
 
 /* Scanlines */
@@ -863,8 +874,8 @@ body {
   pointer-events: none;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.22) 0,
-    rgba(0, 0, 0, 0.22) 1px,
+    rgba(0, 0, 0, 0.08) 0,
+    rgba(0, 0, 0, 0.08) 1px,
     transparent 1px,
     transparent 3px
   );
@@ -879,11 +890,11 @@ body {
   z-index: 301;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.5) 100%),
-    linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.035), transparent);
+    radial-gradient(ellipse at center, transparent 65%, rgba(0, 0, 0, 0.18) 100%),
+    linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.012), transparent);
   background-size: 100% 100%, 100% 30vh;
   background-repeat: no-repeat;
-  animation: crtRoll 9s linear infinite;
+  animation: crtRoll 14s linear infinite;
 }
 
 /* Off switch */
